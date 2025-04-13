@@ -1,0 +1,16 @@
+# Dataset root directory with absolute path
+path: /Users/Jonathas/Desktop/college-code/deep-learning/Smoke-Fire-Detection
+
+# Image directories (relative to 'path')
+train: data/train/  # train 
+val: data/val/  # val 
+test: data/test/  # test images
+
+# Classes
+names: ['smoke', 'fire']  # Replace with your actual class names
+
+# Counts
+nc: 2  # number of classes
+train_count: 14122
+val_count: 3099
+test_count: 4306
