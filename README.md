@@ -97,3 +97,53 @@ Uma solução de Deep Learning para classificação de imagens contendo fumaça,
 ## Script Adicional (`pretrained_model.py`)
 
 Este repositório também contém `pretrained_model.py`, que utiliza a biblioteca `ultralytics` para treinar um modelo YOLOv8 para *detecção* de objetos (fogo e fumaça), em vez de classificação de imagem inteira. Ele usa o arquivo `data.yaml` para configuração do dataset. Para executá-lo (após preparar os dados no formato YOLO e configurar `data.yaml`):
+
+## Executando o Modelo Pré-treinado (YOLOv8 - Detecção)
+
+Este repositório também inclui o script `pretrained_model.py`, que utiliza a biblioteca `ultralytics` para treinar um modelo YOLOv8 para a tarefa de **detecção de objetos** (identificar caixas delimitadoras para fogo e fumaça), em contraste com o notebook `model.ipynb` que faz **classificação de imagem inteira**.
+
+**Pré-requisitos para `pretrained_model.py`:**
+
+1.  **Dataset no Formato YOLO:** Este script espera que os dados estejam no formato YOLO, como baixado do Kaggle e organizado na pasta `data/` (conforme descrito na seção "Preparação dos Dados"). A estrutura deve ser:
+    ```
+    data/
+    ├── train/
+    │   ├── images/
+    │   └── labels/ # Arquivos .txt com anotações YOLO
+    ├── val/
+    │   ├── images/
+    │   └── labels/
+    └── test/
+        ├── images/
+        └── labels/
+    ```
+2.  **Arquivo `data.yaml` Configurado:** O script utiliza o arquivo `data.yaml` para localizar os diretórios de treino, validação e teste, e para definir as classes. Certifique-se de que o caminho (`path:`) no `data.yaml` esteja correto para o seu sistema (pode ser um caminho absoluto ou relativo à raiz do projeto) e que os nomes das classes (`names:`) e o número de classes (`nc:`) estejam corretos. Exemplo de `data.yaml`:
+    ```yaml
+    # Exemplo: data.yaml
+    path: /caminho/absoluto/para/Smoke-Fire-Detection  # OU path: . (se data estiver na raiz)
+    train: data/train/images
+    val: data/val/images
+    test: data/test/images
+
+    nc: 2
+    names: ['smoke', 'fire']
+    ```
+3.  **Dependências Instaladas:** Certifique-se de que todas as dependências, incluindo `ultralytics`, foram instaladas (veja a seção "Configuração do Ambiente").
+
+**Execução:**
+
+1.  **Navegue até o diretório raiz do projeto** no seu terminal (onde `pretrained_model.py` e `data.yaml` estão localizados).
+2.  **Execute o script Python:**
+    ```bash
+    python pretrained_model.py
+    ```
+
+**O que o Script Faz:**
+
+*   Carrega a configuração do dataset a partir de `data.yaml`.
+*   Verifica a existência dos diretórios de dados.
+*   Carrega um modelo YOLOv8 pré-treinado (`yolov8n.pt`).
+*   Inicia o treinamento do modelo YOLOv8 nos dados especificados em `data.yaml` por um número definido de épocas (atualmente 10 no script).
+*   Avalia o modelo treinado no conjunto de validação.
+*   Testa o modelo em algumas imagens do conjunto de teste (opcionalmente, pode ser expandido).
+*   Exporta o modelo treinado para um formato padrão (por exemplo, `.pt`).

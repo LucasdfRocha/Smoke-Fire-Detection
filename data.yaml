@@ -1,5 +1,5 @@
 # Dataset root directory with absolute path
-path: /Users/Jonathas/Desktop/college-code/deep-learning/Smoke-Fire-Detection
+path: /caminho/absoluto/para/Smoke-Fire-Detection
 
 # Image directories (relative to 'path')
 train: data/train/  # train 
