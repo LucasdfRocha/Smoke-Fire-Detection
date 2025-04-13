@@ -11,7 +11,7 @@ Uma solução de Deep Learning para classificação de imagens contendo fumaça,
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <url-do-seu-repositorio>
+    git clone https://github.com/LucasdfRocha/Smoke-Fire-Detection
     cd Smoke-Fire-Detection
     ```
 
